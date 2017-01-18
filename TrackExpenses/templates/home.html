@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<div class="container">
+<div class="row">
+    <form method="POST" action=''>
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Add an item" />
+    </form>
+</div>
+<br>
+<div class="row">
+  {% for key, value in d.items %}
+  <div class="col-xs-12 col-sm-6 col-md-{% widthratio 12 numCat 1 %}">
+    <div class="panel panel-primary ">
+      <div class="panel-heading">
+          <h3 class="panel-title text-left"> {{key}} </h3>
+          <div class = "text-right"> <h4 style="color: white"> {{value}} </h4> / {{key.budget}}
+          </div>
+          </div>
+        <div class="panel-body">
+          {% for item in items %}
+            {% if item.category == key %}
+              {{item.name}} {{item.price}} <br>
+            {% endif %}
+          {% endfor %}
+          </div>
+  </div>
+  </div>
+  {% endfor %}
+{% endblock %}
